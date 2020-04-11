@@ -3,10 +3,11 @@
 * Color Names -- http://chir.ag/projects/name-that-color/
 */
 
-$white            : #ffffff;
-$black            : #000000;
-$flamingo         : #f26725;
-$spring-wood      : #f6f6ef;
+$white                  : #ffffff;
+$black                  : #000000;
+$flamingo               : #f26725;
+$spring-wood            : #f6f6ef;
+$border-color           : #c8dce0;
 
 /*
 * Fonts
@@ -43,3 +44,10 @@ $font-settings: (
     line-height: $base-line-height * 2
   )
 );
+
+
+/*
+* Border
+*/
+
+$border-radius: 3px;

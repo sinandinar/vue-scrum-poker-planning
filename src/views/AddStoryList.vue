@@ -1,16 +1,50 @@
 <template lang="pug">
-  div(class="home")
-    HelloWorld(msg="Welcome to Your Vue.js App")
+  .StoryList
+    .StoryList-wrapper
+
+      InputGroup(flow="column")
+        Input(
+          v-model="form.SessionName",
+          label="Session Name:",
+          name="sessionName",
+          placeHolder="Please enter session name")
+        Input(
+          v-model="form.NumberOfVoters",
+          label="Number of Voters:",
+          name="numberOfVoters",
+          placeHolder="Please enter number of voters")
+
+      InputGroup(label="Paste your story List (Each line will be converted as a story)")
+        Input(
+          v-model="form.StoryList",
+          inputType="textarea",
+          rows="20",
+          name="storyList",
+          placeHolder="Please enter story list")
+
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'AddStoryList',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      form: {
+        SessionName: '',
+        NumberOfVoters: '',
+        StoryList: ''
+      }
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .StoryList{
+    &-wrapper{
+      width: 1000px;
+      margin: 0 auto;
+    }
+  }
+</style>

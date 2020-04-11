@@ -1,5 +1,5 @@
 <template lang="pug">
-  header.header
+  header.Header
     span
       router-link(to="/") Scrum Poker Planning
 </template>
@@ -11,12 +11,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  header.header {
+  header.Header {
     height: 100px;
     background: $flamingo;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 50px;
 
     a {
       color: $white;
