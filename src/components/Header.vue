@@ -11,16 +11,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-header.header {
-  height: 100px;
-  background: $flamingo;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  header.header {
+    height: 100px;
+    background: $flamingo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  a {
-    color: $white;
-    @include theme-font-setting('xl', 'medium');
+    a {
+      color: $white;
+      @include theme-font-setting('xl', 'medium');
+    }
   }
-}
 </style>

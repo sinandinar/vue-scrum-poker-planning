@@ -15,6 +15,11 @@ const routes = [
     // this generates a separate chunk for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/AddStoryList.vue')
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/NotFound.vue')
   }
 ]
 
