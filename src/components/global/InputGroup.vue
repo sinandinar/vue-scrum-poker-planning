@@ -36,7 +36,7 @@ export default {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 
-  &-label{
+  &-label {
     color: $black;
     @include theme-font-setting('md', 'regular');
     margin-bottom: 10px;

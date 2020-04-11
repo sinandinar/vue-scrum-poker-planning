@@ -17,7 +17,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 
     a {
       color: $white;
