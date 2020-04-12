@@ -17,6 +17,16 @@ const routes = [
     component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/AddStoryList.vue')
   },
   {
+    path: '/poker-planning-view-as-scrum-master/:sprintName',
+    name: 'ViewAsScrumMaster',
+    component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/ViewPokerPlan.vue')
+  },
+  {
+    path: '/poker-planning-view-as-developer/:sessionId',
+    name: 'ViewAsDeveloper',
+    component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/ViewPokerPlan.vue')
+  },
+  {
     path: '*',
     name: 'NotFound',
     component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/NotFound.vue')

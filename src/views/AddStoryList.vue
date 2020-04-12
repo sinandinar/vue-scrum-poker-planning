@@ -50,14 +50,17 @@ export default {
   methods: {
     startSession () {
       this.validate()
+      if (this.errorMessages.length > 0) return
 
       const storyList = this.form.StoryList
         .split('\n')
         .map(_ => _.trim())
         .filter(Boolean)
         .map(_ => ({ storyName: _ }))
+      console.log('sad', storyList)
 
-      console.log(storyList)
+      const sessionId = this.generateGUID()
+      this.$router.push({ name: 'ViewAsScrumMaster', params: { sessionId: sessionId, sprintName: this.form.SessionName.toLowerCase() } })
     },
     validate () {
       this.errorMessages = []
@@ -80,6 +83,14 @@ export default {
     },
     removeError (index) {
       this.errorMessages.splice(index, 1)
+    },
+    generateGUID () {
+      const s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1)
+      }
+      return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
     }
   }
 }
