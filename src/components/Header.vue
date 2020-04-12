@@ -3,7 +3,7 @@
     span
       router-link(to="/") Scrum Poker Planning
     span(v-if="isViewAsScrumMaster") Please share link of developers panel to the teammates:
-      router-link.Header-link(:to="{ name: 'ViewAsDeveloper', params: { sessionId: sessionId } }" :class="{ 'router-link-active': isViewAsScrumMaster }") {{ `poker-planning-view-as-developer/${sessionId}` }}
+      router-link.Header-link(target="_blank" :to="{ name: 'ViewAsDeveloper', params: { sessionId: sessionId } }" :class="{ 'router-link-active': isViewAsScrumMaster }") {{ `poker-planning-view-as-developer/${sessionId}` }}
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
 
     a {
       color: $white;

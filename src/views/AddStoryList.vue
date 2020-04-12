@@ -2,8 +2,7 @@
   .StoryList
     .StoryList-wrapper
       .Error(v-if="errorMessages.length" v-for="(error, index) in errorMessages" :key="index")
-        ul
-          li {{ error }}
+        .Error-title {{ error }}
         svg.Error-btn(@click="removeError(index)") #[use(xlink:href="#icon-close")]
 
       InputGroup(flow="column" style="margin-top: 25px")
@@ -18,7 +17,8 @@
           label="Number of Voters:",
           name="numberOfVoters",
           placeHolder="Please enter number of voters",
-          type="number")
+          type="number",
+          min="1")
 
       InputGroup(label="Paste your story List (Each line will be converted as a story)")
         Input(
@@ -35,6 +35,9 @@
 
 <script>
 
+import { mapActions } from 'vuex'
+import uuid from 'uuid/v4'
+
 export default {
   name: 'AddStoryList',
   data () {
@@ -48,19 +51,34 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setSession'
+    ]),
     startSession () {
       this.validate()
-      if (this.errorMessages.length > 0) return
+      if (this.errorMessages.length > 0) return false
 
-      const storyList = this.form.StoryList
+      const StoryList = this.form.StoryList
         .split('\n')
         .map(_ => _.trim())
         .filter(Boolean)
-        .map(_ => ({ storyName: _ }))
-      console.log('sad', storyList)
+        .map(_ => ({
+          StoryName: _,
+          StoryPoint: null,
+          StoryId: uuid(),
+          Votes: []
+        }))
+      const SessionId = uuid()
 
-      const sessionId = this.generateGUID()
-      this.$router.push({ name: 'ViewAsScrumMaster', params: { sessionId: sessionId, sprintName: this.form.SessionName.toLowerCase() } })
+      const session = {
+        SessionName: this.form.SessionName,
+        NumberOfVoters: this.form.NumberOfVoters,
+        StoryList,
+        SessionId
+      }
+      this.setSession(session)
+
+      this.$router.push({ name: 'ViewAsScrumMaster', params: { sessionId: SessionId } })
     },
     validate () {
       this.errorMessages = []
@@ -83,15 +101,10 @@ export default {
     },
     removeError (index) {
       this.errorMessages.splice(index, 1)
-    },
-    generateGUID () {
-      const s4 = () => {
-        return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1)
-      }
-      return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
     }
+  },
+  created () {
+    localStorage.clear()
   }
 }
 </script>
@@ -113,16 +126,21 @@ export default {
     background: $danger;
     color: $white;
     margin-top: 6px;
-    padding: 3px;
+    padding: 15px;
     border-radius: 3px;
     position: relative;
+
+    &-title {
+      color: $white;
+      @include theme-font-setting('base', 'regular');
+    }
 
     &-btn {
       position: absolute;
       width: 24px;
       height: 24px;
       right: 15px;
-      top: 15px;
+      top: 13px;
       cursor: pointer;
       fill: $white;
     }

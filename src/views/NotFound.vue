@@ -1,6 +1,6 @@
 <template lang="pug">
-  .not-found
-    .not-found__title Time travel is not possible at this time!
+  .Not-found
+    .Not-found__title Time travel is not possible at this time!
 </template>
 
 <script>
@@ -10,7 +10,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .not-found {
+  .Not-found {
     text-align: center;
     margin-top: 50px;
 

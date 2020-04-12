@@ -47,6 +47,21 @@ export default {
     border-radius: $border-radius;
     background-color: $flamingo;
     color: $white;
-    @include theme-font-setting('md', 'regular');
+    @include theme-font-setting('base', 'regular');
+
+    &-sm {
+      width: 60px;
+      height: 60px;
+    }
+
+    &--disabled {
+      pointer-events: none;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    &--success {
+      background-color: $success;
+    }
   }
 </style>
