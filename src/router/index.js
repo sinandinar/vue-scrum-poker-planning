@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AddStoryList from '../views/AddStoryList'
-import ViewPokerPlan from '../views/ViewPokerPlan'
 import NotFound from '../views/NotFound'
 
 Vue.use(VueRouter)
@@ -19,12 +18,12 @@ const routes = [
   {
     path: '/poker-planning-view-as-scrum-master/:sessionId',
     name: 'ViewAsScrumMaster',
-    component: ViewPokerPlan
+    component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/ViewPokerPlan.vue')
   },
   {
     path: '/poker-planning-view-as-developer/:sessionId',
     name: 'ViewAsDeveloper',
-    component: ViewPokerPlan
+    component: () => import(/* webpackChunkName: "scrum-master-planning" */ '../views/ViewPokerPlan.vue')
   },
   {
     path: '*',

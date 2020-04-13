@@ -11,8 +11,18 @@ const vuexLocalStorage = new VuexPersistence({
 
 export default new Vuex.Store({
   state: {
-    session: {},
-    activeStory: {}
+    session: {
+      SessionName: '',
+      NumberOfVoters: '',
+      StoryList: [],
+      SessionId: ''
+    },
+    activeStory: {
+      StoryName: '',
+      StoryPoint: null,
+      StoryId: '',
+      Votes: []
+    }
   },
   getters: {
     session: state => state.session,
@@ -27,13 +37,20 @@ export default new Vuex.Store({
       state.activeStory = activeStory
     },
     RESET_ACTIVE_STORY (state) {
-      state.activeStory = {}
+      state.activeStory = {
+        StoryName: '',
+        StoryPoint: null,
+        StoryId: '',
+        Votes: []
+      }
     },
     SET_STORY_POINT (state, [payload, index]) {
       state.session.StoryList[index].Votes.push(payload)
+      state.activeStory.Votes.push(payload)
     },
     SET_FINAL_SCORE (state, [finalScore, index]) {
       state.session.StoryList[index].StoryPoint = finalScore
+      state.activeStory.StoryPoint = finalScore
     }
   },
   actions: {

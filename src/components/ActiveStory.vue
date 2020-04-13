@@ -17,6 +17,12 @@ export default {
   name: 'ActiveStory',
   data () {
     return {
+      activeStory: {
+        StoryName: '',
+        StoryPoint: null,
+        StoryId: '',
+        Votes: []
+      },
       storyPoints: [
         1, 2, 3, 5,
         8, 13, 21, 34,
@@ -28,7 +34,6 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'activeStory',
       'session'
     ]),
     isViewAsScrumMaster () {
@@ -51,7 +56,7 @@ export default {
     },
     infoText () {
       if (this.hasAllTeamVoted) return 'All team has voted !!'
-      if ((this.hasFromScrumMasterVoted && this.isViewAsScrumMaster) || (this.hasFromDeveloperVoted && !this.isViewAsScrumMaster)) return 'You Voted !!'
+      if ((this.hasFromScrumMasterVoted && this.isViewAsScrumMaster) || (this.hasFromDeveloperVoted && !this.isViewAsScrumMaster && this.isVoted)) return 'You Voted !!'
       return 'Please Vote !!'
     },
     storyIndex () {
@@ -92,6 +97,16 @@ export default {
   },
   created () {
     this.isVoted = false
+    this.activeStory = JSON.parse(localStorage.getItem('vuex')).activeStory
+    this.fetchInterval = setInterval(() => {
+      this.activeStory = JSON.parse(localStorage.getItem('vuex')).activeStory
+    }, 2000)
+  },
+  mounted () {
+    this.isVoted = false
+  },
+  destroyed () {
+    clearInterval(this.fetchInterval)
   }
 }
 </script>

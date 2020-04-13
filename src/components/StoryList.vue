@@ -16,16 +16,14 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'StoryList',
-  computed: {
-    ...mapGetters([
-      'session'
-    ]),
-    storyList () {
-      return this.session.StoryList
+  data () {
+    return {
+      fetchInterval: null,
+      storyList: []
     }
   },
   methods: {
@@ -41,6 +39,15 @@ export default {
     storyStatus (story, index) {
       return story.Votes.length === 0 ? 'Not Voted' : 'Voted'
     }
+  },
+  created () {
+    this.storyList = JSON.parse(localStorage.getItem('vuex')).session.StoryList
+    this.fetchInterval = setInterval(() => {
+      this.storyList = JSON.parse(localStorage.getItem('vuex')).session.StoryList
+    }, 2000)
+  },
+  destroyed () {
+    clearInterval(this.fetchInterval)
   }
 }
 </script>

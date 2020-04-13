@@ -10,6 +10,8 @@
       v-model="finalScore",
       label="Final Score:",
       name="finalScore",
+      type="number",
+      min="1",
       placeHolder="Please enter final score")
     .Button-wrapper
       button.Button(
@@ -27,12 +29,18 @@ export default {
   name: 'ScrumMasterPanel',
   data () {
     return {
-      finalScore: null
+      finalScore: null,
+      fetchInterval: null,
+      activeStory: {
+        StoryName: '',
+        StoryPoint: null,
+        StoryId: '',
+        Votes: []
+      }
     }
   },
   computed: {
     ...mapGetters([
-      'activeStory',
       'session'
     ]),
     headerTitle () {
@@ -62,7 +70,7 @@ export default {
         return false
       }
       this.setFinalScore([
-        this.finalScore,
+        Number(this.finalScore),
         this.storyIndex
       ])
       this.finalScore = null
@@ -81,6 +89,15 @@ export default {
       }
       return 'Not Voted'
     }
+  },
+  created () {
+    this.activeStory = JSON.parse(localStorage.getItem('vuex')).activeStory
+    this.fetchInterval = setInterval(() => {
+      this.activeStory = JSON.parse(localStorage.getItem('vuex')).activeStory
+    }, 2000)
+  },
+  destroyed () {
+    clearInterval(this.fetchInterval)
   }
 }
 </script>
