@@ -2,7 +2,7 @@
   Panel(panelTitle="Active Story", :headerTitle="activeStory.StoryName")
     .Active-story
       button.Button.Button-sm(
-        v-for="point in storyPoints",
+        v-for="point in possibleStoryPoints",
         :key="point",
         :class="[{ 'Button--disabled': hasDisabled || !activeStory.StoryName }, { 'Button--success': isSelected[point] && isVoted }]"
         @click="voteStoryPoint(point)") {{ point }}
@@ -23,7 +23,7 @@ export default {
         StoryId: '',
         Votes: []
       },
-      storyPoints: [
+      possibleStoryPoints: [
         1, 2, 3, 5,
         8, 13, 21, 34,
         55, 89, 134

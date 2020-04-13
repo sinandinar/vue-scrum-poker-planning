@@ -36,7 +36,12 @@ export default {
         StoryPoint: null,
         StoryId: '',
         Votes: []
-      }
+      },
+      possibleStoryPoints: [
+        1, 2, 3, 5,
+        8, 13, 21, 34,
+        55, 89, 134
+      ]
     }
   },
   computed: {
@@ -65,8 +70,9 @@ export default {
       'setFinalScore'
     ]),
     endVotingForStory () {
-      if (!/^[1-9]\d*$/.exec(this.finalScore)) {
-        alert('Final Score field must greater than 0.')
+      const isFinalScore = !!this.possibleStoryPoints.find(_ => _ === Number(this.finalScore))
+      if (!isFinalScore) {
+        alert('The Final Score field must be one of the following. "1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 134"')
         return false
       }
       this.setFinalScore([
