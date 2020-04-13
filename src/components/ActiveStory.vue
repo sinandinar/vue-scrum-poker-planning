@@ -117,7 +117,7 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
-    margin-left: 25px;
+    margin-left: 35px;
 
     &-title {
       margin-top: 50px;
