@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
   .Container {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 3fr 2fr 2fr;
     grid-column-gap: 25px;
     padding: 0 100px;
   }
